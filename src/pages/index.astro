@@ -18,10 +18,10 @@ import thumbsup from "../assets/images/thumbsup.png";
 
 	<section class="bg-[var(--color-bg-col2)] lg:grid lg:grid-cols-2 -mt-10 lg:mt-0">
 		<div class="m-10 lg:m-20 pt-10">
-		<h1 class="font-oswald text-[30px] lg:text-[60px]">Kreativitet med øje for detaljen</h1>
-		<p class="font-fauna text-[16px] lg:text-[24px]">Som multimediedesign-studerende har jeg en passion for at skabe digitale løsninger, der forener æstetik og funktionalitet. Jeg arbejder både med design og udvikling, og jeg trives med at eksperimentere, lære nyt og udfordre idéer. Min kreative tilgang og sans for detaljen hjælper mig med at udvikle koncepter, der ikke bare ser godt ud, men også skaber værdi for brugeren. Jeg er nysgerrig, åben og motiveret for at udvikle mig gennem praksis og samarbejde.</p>
+		<h1 class="font-oswald text-[30px] lg:text-[60px] animate-fade-right animate-once animate-duration-[2000ms] animate-delay-500">Kreativitet med øje for detaljen</h1>
+		<p class="font-fauna text-[16px] lg:text-[24px] pt-5 animate-fade-right animate-once animate-duration-[3000ms] animate-delay-1000">Som multimediedesign-studerende har jeg en passion for at skabe digitale løsninger, der forener æstetik og funktionalitet. Jeg arbejder både med design og udvikling, og jeg trives med at eksperimentere, lære nyt og udfordre idéer. Min kreative tilgang og sans for detaljen hjælper mig med at udvikle koncepter, der ikke bare ser godt ud, men også skaber værdi for brugeren. Jeg er nysgerrig, åben og motiveret for at udvikle mig gennem praksis og samarbejde.</p>
 		</div>
-		<div> <img src="/public/ide.svg" alt="billede af ide" class="w-50 lg:w-100"/></div>
+		<div> <img src="/public/kunst.png" alt="billede af kunst" class="w-50 lg:w-140 justify-self-center pt-20 animate-fade-up animate-once animate-duration-[2000ms] animate-delay-200"/></div>
 	</section>
 
 	<section>
@@ -58,4 +58,71 @@ import thumbsup from "../assets/images/thumbsup.png";
 
 	</section>
 </main>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Find alle elementer som har en klasse der starter med "animate-"
+  const candidates = Array.from(document.querySelectorAll('[class*="animate-"]'))
+    .filter(el => Array.from(el.classList).some(c => c.startsWith("animate-") || c === "animate"));
+
+  // Gem animation-klasserne og fjern dem, sæt elementet skjult initialt
+  candidates.forEach(el => {
+    const animClasses = Array.from(el.classList).filter(c => c.startsWith("animate-") || c === "animate");
+    if (animClasses.length === 0) return;
+    el.dataset.__anim = animClasses.join(" ");
+    animClasses.forEach(c => el.classList.remove(c));
+    if (!el.classList.contains("opacity-0")) el.classList.add("opacity-0");
+  });
+
+  // Parse tid (f.eks. "200ms" eller "2s")
+  const parseTimeSec = (str) => {
+    if (!str) return 0;
+    str = str.trim();
+    if (str.endsWith("ms")) return parseFloat(str) / 1000;
+    if (str.endsWith("s")) return parseFloat(str);
+    return parseFloat(str);
+  };
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const stored = el.dataset.__anim;
+      if (!stored) {
+        obs.unobserve(el);
+        return;
+      }
+
+      // Gen-tilføj animation-klasser
+      stored.split(" ").forEach(c => el.classList.add(c));
+
+      // Læs faktiske CSS animation-duration og animation-delay fra computed style
+      const cs = getComputedStyle(el);
+      const durations = cs.animationDuration ? cs.animationDuration.split(",") : ["0s"];
+      const delays = cs.animationDelay ? cs.animationDelay.split(",") : ["0s"];
+
+      // For hver animation (der kan være flere comma-separated) beregn total tid (delay + duration)
+      const times = durations.map((d, i) => {
+        const dur = parseTimeSec(d);
+        const del = parseTimeSec(delays[i] ? delays[i] : delays[0]);
+        return dur + del;
+      });
+      const maxTime = Math.max(...times, 0);
+
+      // Når animationen er færdig, fjern opacity-0 så elementet forbliver synligt
+      // små ekstra 50ms buffer for sikkerhed
+      setTimeout(() => {
+        el.classList.remove("opacity-0");
+      }, Math.round(maxTime * 1000) + 50);
+
+      obs.unobserve(el); // kun én gang
+    });
+  }, { threshold: 0.12 });
+
+  // Start observing
+  candidates.forEach(el => observer.observe(el));
+});
+</script>
+
+
 </MainLayout>
