@@ -6,10 +6,56 @@ import { Image } from 'astro:assets';
 import thumbsup from "../assets/images/thumbsup.png";
 ---
 <MainLayout title="Titel">
-	<article>
-		<h1>Index overskrift</h1>
-		<Button>Klik!</Button>
-		<p>Link til <Link href="https://www.kea.dk" target="_blank">En anden side</Link></p>
-		<Image src={thumbsup} alt=""></Image>
-	</article>
+	<main class="bg-[var(--color-sekundary)]">
+
+		<section id="hjem" class="relative bg-primary-500 grid justify-center justify-items-center pt-20 md:pt-40">
+		<div class="text-xl md:text-[50px]  text-primary font-shadows z-10 relative"><p>Hello I´m</p></div>
+		<div class="text-[200px] md:text-[400px] text-primary-300 font-oswald z-0 -mb-10 lg:-mt-25"><h1>EMMA</h1></div>
+		<div class="relative z-10 -mt-30 lg:-mt-80 animate-fade-up"><img src="mig.png" alt="MIG" class="w-108 lg:w-[400px]"></div>
+			<div class="text-[70px] font-oswald relative z-20 -mt-50"><h1>Graphic Designer</h1></div>
+		<div class="text-[60px] text-primary font-shadows relative z-20 -mt-42"><h1>Graphic Designer</h1></div>
+	</section>
+
+	<section class="bg-[var(--color-bg-col2)] lg:grid lg:grid-cols-2">
+		<div class="m-10 lg:m-20">
+		<h1 class="font-oswald text-[30px] lg:text-[60px]">Engageret og kreativ multimediedesign-studerende på jagt efter praktik</h1>
+		<p class="font-fauna text-[16px] lg:text-[24px]">Jeg er multimediedesign-studerende med en passion for at skabe digitale løsninger, der kombinerer æstetik og funktionalitet. Jeg arbejder med både design og udvikling og brænder for at lære nyt, eksperimentere med ideer og udvikle kreative koncepter, der giver værdi for brugeren. Som studerende er jeg nysgerrig, åben og klar til at udvikle mig gennem praksis og samarbejde.</p>
+		</div>
+		<div> <img src="/public/ide.svg" alt="billede af ide" class="w-50 lg:w-100"/></div>
+	</section>
+
+	<section>
+		<h2 class="font-shadows text-[32px]">Erfaring</h2>
+		<h2 class="font-shadows text-[32px]">Værktøjer</h2>
+		<h2 class="font-shadows text-[32px]">Interesse</h2>
+	</section>
+
+	<section class="bg-[var(--color-bg-col2)] lg:pt-10">
+		<h1 class="font-oswald text-[30px] lg:text-[60px] text-center">Tidligere projekter</h1>
+		<div class="lg:grid grid-cols-2 lg:mt-20">
+			<div class="lg:ml-20 lg:mt-25">
+				<h2 class="font-shadows text-[32px]">Spil - Animation</h2>
+				<p class="font-fauna text-[16px] lg:text-[24px]">I dette projekt udviklede jeg et spil, hvor jeg selv designede alle grafiske elementer i Adobe Illustrator. Gennem arbejdet fik jeg praktisk erfaring med Illustrator og opdagede min interesse for at arbejde med grafisk design. Projektet styrkede både mine kreative evner og min forståelse for, hvordan visuel identitet kan understøtte et digitalt produkt</p>
+			</div>
+			<div><img src="/public/froespil.png" alt=""></div>
+		</div>
+
+			<div class="lg:grid grid-cols-2">
+					<div><img src="/public/kulturnat.png" alt=""></div>
+			<div class="lg:mr-20 lg:mt-25">
+				<h2 class="font-shadows text-[32px]">Case opgave - Helsingør kulturnat</h2>
+				<p class="font-fauna text-[16px] lg:text-[24px]">I dette projekt fik vi en case om Helsingør Kulturnat, hvor vi som gruppe skulle udvikle et website-koncept. Jeg bidrog aktivt i idéudviklingen, hvor vi byggede videre på hinandens inputs og omsatte dem til konkrete løsninger. Undervejs arbejdede vi primært i Figma, hvor vi designede og testede prototyper. Projektet gav mig værdifuld erfaring med samarbejde, konceptudvikling og designprocesser, der førte frem til et produkt, vi som team var stolte af.</p>
+			</div>
+		</div>
+		<div class="lg:grid grid-cols-2">
+					<div><img src="/public/tpcmobil.png" alt=""></div>
+			<div><img src="/public/tpclabtop.png" alt=""></div>
+		</div>
+		<div class="lg:mr-20 lg:ml-20"> 
+				<h2 class="font-shadows text-[32px]">Eksamensprojekt - Virksomhedssite/Content creation</h2>
+				<p class="font-fauna text-[16px] lg:text-[24px]">I vores eksamensprojekt udviklede vi et virksomhedssite med fokus på content creation. Vi lagde vægt på at gennemgå hele designprocessen – fra idéudvikling til det færdige produkt. Undervejs blev det tydeligt, hvor vigtigt det er at generere og afprøve flere idéer, før man fastlægger den endelige løsning. Projektet styrkede både min forståelse for strukturerede arbejdsprocesser og værdien af kreativ udforskning i et team.</p>
+			</div>
+
+	</section>
+</main>
 </MainLayout>
